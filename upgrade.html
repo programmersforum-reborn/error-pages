@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="refresh" content="600">
+        <title>Форум недоступен</title>
+        <style>
+            body {
+                background: #eee;
+                
+            }
+            .center {
+                display: flex;
+                justify-content: center;
+            }
+            .container {
+                background: #bbb;
+                max-width: 1280px;
+                padding: 50px 50px 30px 50px;
+                margin-top: 50px;
+            }
+            .title {
+                padding-top: 20px;
+            }
+            h1, h2, p {
+                font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="center">
+            <div class="container">
+                <div class="center">
+                    <iframe src="https://www.youtube.com/embed/htWM5ZtONU4?autoplay=1&mute=1" width="800" height="450" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <h1 class="title">Форум обновляется/перезагружается.</h1>
+                <h2>Зайдите через 5-10 минут.</h2>
+                <div class="center">
+                    <img id="catImg">
+                </div>
+            </div>
+        </div>
+
+<script>
+function ajaxGet(url, callback) {
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.onreadystatechange = function() {
+    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+      try {
+        var data = JSON.parse(xmlhttp.responseText);
+        callback(data);
+      } catch (err) {
+        console.log(err.message + ' ' + xmlhttp.responseText);
+      }
+    }
+  };
+  xmlhttp.open("GET", url, true);
+  xmlhttp.setRequestHeader('x-api-key', 'PUT_API_KEY_HERE_TO_GET_MORE_CATS');
+  xmlhttp.send();
+}
+
+ajaxGet('https://api.thecatapi.com/v1/images/search?size=full', function(data) {
+  document.getElementById('catImg').src = data[0]["url"] ;
+});
+</script>
+    </body>
+</html>
